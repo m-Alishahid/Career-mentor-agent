@@ -27,20 +27,21 @@ config = RunConfig(model=model, tracing_disabled=True)
 career_agent = Agent(
     name="CareerAgent",
     instructions="Ask about interests and suggest a career field.",
-    model=model
+      handoffs=["skill_agent"] 
 )
 
 skill_agent = Agent(
     name="SkillAgent",
     instructions="Share the roadmap using the get_career_roadmap tool.",
     model=model,
-    tools=[get_career_roadmap]
+   handoffs=["job_agent"]  
 )
 
 job_agent = Agent(
     name="JobAgent",
     instructions="Suggest job titles in the chosen career.",
     model=model
+     handoffs=[]  
 )
 
 def main():
